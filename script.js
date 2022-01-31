@@ -18,7 +18,7 @@
 
     let fullPrice = screenPrice + servicePrice1 + servicePrice2;
 
-    let servicePercent = fullPrice / 13;
+    let servicePercent = fullPrice / 100 * 13;
 
     let servicePercentPrice = fullPrice - servicePercent;
 
