@@ -1,6 +1,6 @@
-   "use strict"
+    "use strict"
 
-    let title = prompt("Как называется ваш проект?");
+    let title = prompt("Как называется ваш проект?").trim();
 
     let screens = prompt("Какие типы экранов нужно разработать?");
 
@@ -10,26 +10,59 @@
 
     let service1 = prompt("Какой дополнительный тип услуги нужен? service1");
 
-    let service2 = prompt("Какой дополнительный тип услуги нужен? service2");
+    let servicePrice1 = parseInt(prompt("Сколько это будет стоить"));
 
-    let servicePrice1 = parseInt(prompt("Какой дополнительный тип услуги нужен? servicePrice1"));
+    let service2 = prompt("Какой дополнительный тип услуги нужен?");
 
-    let servicePrice2 = parseInt(prompt("Какой дополнительный тип услуги нужен? servicePrice2"));
+    let servicePrice2 = parseInt(prompt("Сколько это будет стоить"));
 
-    let fullPrice = screenPrice + servicePrice1 + servicePrice2;
+    let fullPrice;
 
-    let servicePercent = fullPrice / 100 * 13;
+    let servicePercent;
 
-    let servicePercentPrice = fullPrice - servicePercent;
+    // Задание №1
 
-    console.log(Math.ceil(servicePercentPrice));
-
-    if (fullPrice >= 30000) {
-        console.log("Даем скидку в 10%")
-    } else if (fullPrice >= 15000 && fullPrice <= 30000) {
-        console.log("Даем скидку в 5%")
-    } else if (fullPrice <= 15000 && fullPrice >= 0) {
-        console.log("Скидка не предусмотрена")
-    } else {
-        console.log("Что то пошло не так")
+    const allServicePrices = function getAllServicePrices() {
+        return servicePrice1 + servicePrice2
     }
+
+    // Задание №2
+
+    fullPrice = getFullPrice();
+
+    function getFullPrice() {
+        return screenPrice + allServicePrices();
+    }
+
+    // Задание №3
+
+    function getTitle() {
+        return title[0].toUpperCase() + title.toLowerCase().slice(1);
+    }
+
+    // Задание №4
+
+    const servicePercentPrice = function getServicePercentPrices() {
+        servicePercent = fullPrice / 100 * 13;
+        return getFullPrice() - servicePercent
+    }
+
+    let showTypeOf = function (variable) {
+    console.log(variable);
+    }
+
+    const getRollbackMessage = function (price) {
+        if (fullPrice >= 30000) {
+            return "Даем скидку в 10%"
+        } else if (fullPrice >= 15000 && fullPrice <= 30000) {
+            return "Даем скидку в 5%"
+        } else if (fullPrice <= 15000 && fullPrice >= 0) {
+            return "Скидка не предусмотрена"
+        } else {
+            return "Что то пошло не так"
+        }
+    }
+
+    console.log(screens.split(' '))
+    showTypeOf(getRollbackMessage())
+    showTypeOf(servicePercentPrice())
