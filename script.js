@@ -1,52 +1,44 @@
 "use strict"
 
 let title;
-
 let screens;
-
 let screenPrice;
-
 let adaptive;
 
+let rollback;
+let allServicePrices;
+let fullPrice;
+let servicePercentPrice;
 let service1;
-
 let service2;
 
-let fullPrice;
-
-let servicePercent;
-
-let allServicePrices;
-
-let rollback = 10;
-
-const isNumber = function (num) {
-    return !isNumber(parseFloat(num)) && isFinite(num)
+const isNumber = function(num) {
+    return !isNaN(parseFloat(num)) && isFinite(num)
 }
 
-const asking = function () {
-    title = prompt("Как называется ваш проект?");
+const asking = function() {
+    title = prompt("Как называется ваш проект?", "Glo");
 
-    screens = prompt("Какие типы экранов нужно разработать?");
+    screens = prompt("Какие типы экранов нужно разработать?", "Сложные");
 
-    screenPrice = parseInt(prompt("Сколько будет стоить данная работа?"));
+    screenPrice = +prompt("Сколько будет стоить данная работа?", "30000");
 
     while (!isNumber(screenPrice)) {
-        screenPrice = parseInt(prompt("Сколько будет стоить данная работа?"));
+        screenPrice = prompt("Сколько будет стоить данная работа?");
     }
     adaptive = confirm("Нужен ли адаптив на сайте?");
 }
 
-const getAllServicePrices = function () {
+const getAllServicePrices = function() {
     let sum = 0
     for (let i = 0; i < 2; i++) {
         if (i === 0) {
-            service1 = prompt("Какой дополнительный тип услуги нужен?")
+            service1 = prompt("Какой дополнительный тип услуги нужен?", "Вёрстка")
         } else if (i === 1) {
-            service2 = prompt("Какой дополнительный тип услуги нужен?")
+            service2 = prompt("Какой дополнительный тип услуги нужен?", "Модальное окно")
         }
 
-        sum += parseInt(prompt("Сколько это будет стоить"))
+        sum += +prompt("Сколько это будет стоить")
 
     }
 
@@ -55,24 +47,19 @@ const getAllServicePrices = function () {
 }
 
 let showTypeOf = function (variable) {
-    console.log(variable,typeof variable);
+    console.log(variable);
 }
 
-// Задание №2
-
-const  getFullPrice = function() {
+const getFullPrice = function() {
     return screenPrice + allServicePrices;
 }
 
-// Задание №3
-
-const getTitle = function() {
-    return title.trim()[0].toUpperCase() + title.trim().substr(1).toLowerCase();
+const getTitle = function () {
+    return title[0].toUpperCase() + title.toLowerCase().slice(1);
 }
 
-// Задание №4
 
-const getServicePercentPrices = function () {
+const getServicePercentPrice = function(){
     return fullPrice - (fullPrice * (rollback / 100))
 }
 
@@ -87,53 +74,15 @@ const getRollbackMessage = function (price) {
         return "Что то пошло не так"
     }
 }
+
+asking()
+
 allServicePrices = getAllServicePrices();
 fullPrice = getFullPrice();
-ServicePercentPrices = getServicePercentPrices();
-title = getTitle();
+servicePercentPrice = getServicePercentPrice()
+title = getTitle()
 
 showTypeOf(title)
-showTypeOf(screenPrice)
-showTypeOf(adaptive)
-
-console.log(getRollbackMessage(fullPrice));
-console.log(typeof title);
-console.log(typeof screenPrice)
-console.log()
-console.log()
-console.log()
-console.log()
-
-const isNumber = function(num) {
-    return !isNumber(parseFloat(num)) && isFinite(num)
-}
-
-const asking = function() {
-    title = prompt("Как называется ваш проект?");
-
-    screens = prompt("Какие типы экранов нужно разработать?");
-
-    screenPrice = parseInt(prompt("Сколько будет стоить данная работа?"));
-
-    while (!isNumber(screenPrice)) {
-        screenPrice = parseInt(prompt("Сколько будет стоить данная работа?"));
-    }
-    adaptive = confirm("Нужен ли адаптив на сайте?");
-}
-
-const getAllServicePrices = function() {
-    let sum = 0
-    for (let i = 0; i < 2; i++) {
-        if (i === 0) {
-            service1 = prompt("Какой дополнительный тип услуги нужен?")
-        } else if (i === 1) {
-            service2 = prompt("Какой дополнительный тип услуги нужен?")
-        }
-
-        sum += parseInt(prompt("Сколько это будет стоить"))
-
-    }
-
-    return sum
-
-}
+console.log(screens.split(' '))
+showTypeOf(getFullPrice())
+showTypeOf(getRollbackMessage())
