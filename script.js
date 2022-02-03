@@ -12,35 +12,39 @@ let servicePercentPrice;
 let service1;
 let service2;
 
-const isNumber = function(num) {
+const isNumber = function (num) {
     return !isNaN(parseFloat(num)) && isFinite(num)
 }
 
-const asking = function() {
-    title = prompt("Как называется ваш проект?", "Glo");
+const asking = function () {
+    title = prompt("Как называется ваш проект?", "glo");
 
     screens = prompt("Какие типы экранов нужно разработать?", "Сложные");
 
-    screenPrice = +prompt("Сколько будет стоить данная работа?", "30000");
+    do {
+        screenPrice = +prompt("Сколько будет стоить данная работа?");
+    } while (!isNumber(screenPrice))
 
-    while (!isNumber(screenPrice)) {
-        screenPrice = prompt("Сколько будет стоить данная работа?");
-    }
     adaptive = confirm("Нужен ли адаптив на сайте?");
+
 }
 
-const getAllServicePrices = function() {
+const getAllServicePrices = function () {
     let sum = 0
+    let price;
+
     for (let i = 0; i < 2; i++) {
         if (i === 0) {
             service1 = prompt("Какой дополнительный тип услуги нужен?", "Вёрстка")
         } else if (i === 1) {
             service2 = prompt("Какой дополнительный тип услуги нужен?", "Модальное окно")
         }
-
-        sum += +prompt("Сколько это будет стоить")
-
+        do {
+            price = +prompt("Сколько это будет стоить")
+            sum += price
+        } while (!isNumber(price))
     }
+
 
     return sum
 
@@ -50,16 +54,16 @@ let showTypeOf = function (variable) {
     console.log(variable);
 }
 
-const getFullPrice = function() {
+const getFullPrice = function () {
     return screenPrice + allServicePrices;
 }
 
 const getTitle = function () {
-    return title[0].toUpperCase() + title.toLowerCase().slice(1);
+    return title.trim()[0].toUpperCase() + title.trim().substr(1).toLowerCase();
 }
 
 
-const getServicePercentPrice = function(){
+const getServicePercentPrice = function () {
     return fullPrice - (fullPrice * (rollback / 100))
 }
 
