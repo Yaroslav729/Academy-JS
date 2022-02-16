@@ -4,28 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b151306a-c03b-4e1a-b656-7e5ac7a4cd58" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/css/index.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/css/index.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fonts/montserrat-v18-latin_cyrillic-300.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fonts/montserrat-v18-latin_cyrillic-300.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fonts/montserrat-v18-latin_cyrillic-700.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fonts/montserrat-v18-latin_cyrillic-700.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fonts/montserrat-v18-latin_cyrillic-regular.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fonts/montserrat-v18-latin_cyrillic-regular.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/script/script.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scss/index.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scss/templates/_custom.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scss/templates/_interface.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scss/templates/_main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scss/templates/_normalize.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scss/utils/_fonts.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+    <list default="true" id="321116c9-882d-48f0-8c45-a374f3e4d532" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/script.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/script/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/script/script.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,16 +23,12 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="24sWfYoNOaFweGWZROko1uK21AF" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectId" id="256OOGpmdrSjurr3kP3339VHRRk" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -58,36 +36,23 @@
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="b151306a-c03b-4e1a-b656-7e5ac7a4cd58" name="Changes" comment="" />
-      <created>1644419879387</created>
+      <changelist id="321116c9-882d-48f0-8c45-a374f3e4d532" name="Changes" comment="" />
+      <created>1644844036914</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1644419879387</updated>
-      <workItem from="1644419880625" duration="8337000" />
+      <updated>1644844036914</updated>
+      <workItem from="1644844038117" duration="14137000" />
+      <workItem from="1644944563433" duration="10023000" />
+      <workItem from="1644989396292" duration="30080000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
