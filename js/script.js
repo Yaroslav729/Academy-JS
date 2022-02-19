@@ -10,6 +10,7 @@ const inputRangeValue = document.querySelector(".rollback .range-value")
 
 const startBtn = document.getElementsByClassName("handler_btn")[0]
 startBtn.setAttribute('disabled', "true")
+
 const resetBtn= document.getElementsByClassName("handler_btn")[1]
 
 const total = document.getElementsByClassName("total-input")[0]
@@ -18,12 +19,11 @@ const totalCountOther = document.getElementsByClassName("total-input")[2]
 const fullTotalCount = document.getElementsByClassName("total-input")[3]
 const totalCountRollback = document.getElementsByClassName("total-input")[4]
 
+const input = document.querySelector(".screen input")
 
-const input = document.querySelector("input")
 
 let screens = document.querySelectorAll(".screen")
 const select = document.getElementsByTagName("option")[0]
-console.log(select)
 
 const appData = {
     title: "",
@@ -49,9 +49,11 @@ const appData = {
         document.title = title.textContent;
     },
 
-    disabledBtn: input.onclick = function (){
-        if (!input.value && select){
-            startBtn.disabled = false
+    disabledBtn: input.oninput = function (){
+        if (input.value.length < 1){
+            startBtn.setAttribute('disabled', "true")
+        } else {
+            startBtn.removeAttribute('disabled')
         }
     },
 
@@ -96,10 +98,12 @@ const appData = {
                 id: index,
                 name: selectName,
                 price: +select.value * +input.value,
-                count: +input.value
+                count: +input.value,
+
             })
+
         })
-        console.log(appData.screens)
+
     },
     addServices: function () {
         otherItemsPercent.forEach(function (item) {
@@ -150,10 +154,7 @@ const appData = {
     },
 
     logger: function () {
-        console.log(appData.fullPrice);
-        console.log(appData.servicePercentPrice)
-        console.log(appData.screens)
     }
 }
-
+console.log(appData.screens)
 appData.init();
