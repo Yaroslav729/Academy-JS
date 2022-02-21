@@ -9,7 +9,7 @@ const inputRange = document.querySelector(".rollback input")
 const inputRangeValue = document.querySelector(".rollback .range-value")
 
 const startBtn = document.getElementsByClassName("handler_btn")[0]
-// startBtn.setAttribute('disabled', "true")
+startBtn.setAttribute('disabled', "true")
 
 const resetBtn = document.getElementsByClassName("handler_btn")[1]
 
@@ -22,19 +22,13 @@ const totalCountRollback = document.getElementsByClassName("total-input")[4]
 let screens = document.querySelectorAll(".screen")
 
 const input = document.querySelectorAll(".screen input")
-for (let i = 0; i < input.length; i++){
-    console.log(input[i])
-    input[i].addEventListener('click', () => {
-        console.log(input[i])
-    })
-}
-
 
 const select = document.getElementsByTagName("option")
 
 const appData = {
     title: "",
     screens: [],
+    inputs: [],
     screenPrice: 0,
     adaptive: true,
     rollback: 0,
@@ -46,27 +40,36 @@ const appData = {
     servicesNumber: {},
     total: 0,
 
+    disabledBtn: function () {
+        function searchNodeHandlerClicks(node, selector, event, callBack) {
+            node.querySelectorAll(selector).forEach(item => (item.oninput = callBack));
+        }
+        function eventClickInput(e) {
+            e.target.value = e.target.value.replace(/\D/g, "");
+            validateInputs()
+                ? startBtn.removeAttribute('disabled')
+                : startBtn.setAttribute('disabled', "true");
+        }
+        function validateInputs() {
+            let inputs = Array(...document.querySelectorAll(".screen input"));
+            for (let index = 0; index < inputs.length; index++) {
+                const element = inputs[index];
+                if (!element.value) return false;
+            }
+            return true;
+        }
+    },
+
     init: function () {
         appData.addTitle()
         startBtn.addEventListener("click", appData.start)
         buttonPlus.addEventListener("click", appData.addScreensBlock)
+        searchNodeHandlerClicks(document, "input", "keydown", eventClickInput);
     },
 
     addTitle: function () {
         document.title = title.textContent;
     },
-
-    // disabledBtn: input.onclick = function () {
-    //     input.forEach(function (elem) {
-    //         console.log(elem.value);
-    //         if (input.value.length < 1) {
-    //             startBtn.setAttribute('disabled', "true")
-    //         } else {
-    //             startBtn.removeAttribute('disabled')
-    //         }
-    //
-    //     })
-    // },
 
     rangeInput: inputRange.oninput = function () {
         inputRangeValue.innerHTML = inputRange.value + "%"
@@ -140,6 +143,7 @@ const appData = {
     addScreensBlock: function () {
         const cloneScreen = screens[0].cloneNode(true)
         screens[screens.length - 1].after(cloneScreen)
+        searchNodeHandlerClicks(cloneScreen, "input", "keydown", eventClickInput);
     },
     addPrices: function () {
         for (let screen of appData.screens) {
@@ -167,4 +171,7 @@ const appData = {
     logger: function () {
     }
 }
+
 appData.init();
+
+
