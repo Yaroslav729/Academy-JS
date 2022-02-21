@@ -9,9 +9,9 @@ const inputRange = document.querySelector(".rollback input")
 const inputRangeValue = document.querySelector(".rollback .range-value")
 
 const startBtn = document.getElementsByClassName("handler_btn")[0]
-startBtn.setAttribute('disabled', "true")
+// startBtn.setAttribute('disabled', "true")
 
-const resetBtn= document.getElementsByClassName("handler_btn")[1]
+const resetBtn = document.getElementsByClassName("handler_btn")[1]
 
 const total = document.getElementsByClassName("total-input")[0]
 const totalCount = document.getElementsByClassName("total-input")[1]
@@ -19,11 +19,18 @@ const totalCountOther = document.getElementsByClassName("total-input")[2]
 const fullTotalCount = document.getElementsByClassName("total-input")[3]
 const totalCountRollback = document.getElementsByClassName("total-input")[4]
 
-const input = document.querySelector(".screen input")
-
-
 let screens = document.querySelectorAll(".screen")
-const select = document.getElementsByTagName("option")[0]
+
+const input = document.querySelectorAll(".screen input")
+for (let i = 0; i < input.length; i++){
+    console.log(input[i])
+    input[i].addEventListener('click', () => {
+        console.log(input[i])
+    })
+}
+
+
+const select = document.getElementsByTagName("option")
 
 const appData = {
     title: "",
@@ -49,15 +56,19 @@ const appData = {
         document.title = title.textContent;
     },
 
-    disabledBtn: input.oninput = function (){
-        if (input.value.length < 1){
-            startBtn.setAttribute('disabled', "true")
-        } else {
-            startBtn.removeAttribute('disabled')
-        }
-    },
+    // disabledBtn: input.onclick = function () {
+    //     input.forEach(function (elem) {
+    //         console.log(elem.value);
+    //         if (input.value.length < 1) {
+    //             startBtn.setAttribute('disabled', "true")
+    //         } else {
+    //             startBtn.removeAttribute('disabled')
+    //         }
+    //
+    //     })
+    // },
 
-    rangeInput: inputRange.onclick = function () {
+    rangeInput: inputRange.oninput = function () {
         inputRangeValue.innerHTML = inputRange.value + "%"
         appData.rollback = inputRangeValue
     },
@@ -156,5 +167,4 @@ const appData = {
     logger: function () {
     }
 }
-console.log(appData.screens)
 appData.init();
