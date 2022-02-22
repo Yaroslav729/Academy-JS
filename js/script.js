@@ -9,7 +9,7 @@ const inputRange = document.querySelector(".rollback input")
 const inputRangeValue = document.querySelector(".rollback .range-value")
 
 const startBtn = document.getElementsByClassName("handler_btn")[0]
-// startBtn.setAttribute('disabled', "true")
+startBtn.setAttribute('disabled', "true")
 
 const resetBtn = document.getElementsByClassName("handler_btn")[1]
 
@@ -18,13 +18,16 @@ const totalCount = document.getElementsByClassName("total-input")[1]
 const totalCountOther = document.getElementsByClassName("total-input")[2]
 const fullTotalCount = document.getElementsByClassName("total-input")[3]
 const totalCountRollback = document.getElementsByClassName("total-input")[4]
-
-let input = document.querySelectorAll(".screen input")
-input.onclick = function () {
-    for (let i = 0; i < input.length; i++) {
-        const element = input[i];
-        console.log(element.value)
-        if (element.value > 1) {
+let screens = document.querySelectorAll(".screen")
+let arrayInput = document.querySelectorAll(".screen input");
+for (let i = 0; i < arrayInput.length; i++) {
+    arrayInput[i].addEventListener('input',OnInputCountScreen);
+}
+function OnInputCountScreen() {
+    let arrayInputCurrent =  document.querySelectorAll(".screen input");
+    for (let i = 0; i < arrayInputCurrent.length; i++) {
+        const element = arrayInputCurrent[i];
+        if (!element.value && !arrayInput[i]) {
             startBtn.setAttribute('disabled', "true");
         }else {
             startBtn.removeAttribute('disabled')
@@ -33,7 +36,7 @@ input.onclick = function () {
 }
 
 
-let screens = document.querySelectorAll(".screen")
+
 
 
 const appData = {
@@ -51,7 +54,7 @@ const appData = {
     servicesNumber: {},
     total: 0,
 
-    disabledBtn: input.onclick = function () {
+    //disabledBtn: btnCalk.onclick = function () {
         // function searchNodeHandlerClicks(node, selector, event, callBack) {
         //     node.querySelectorAll(selector).forEach(item => (item.oninput = callBack));
         // }
@@ -71,7 +74,7 @@ const appData = {
         //             startBtn.removeAttribute('disabled')
         //         }
         //     }
-    },
+    //},
 
     init: function () {
         appData.addTitle()
@@ -96,7 +99,7 @@ const appData = {
         // appData.logger();
         console.log(appData)
         appData.showResult()
-        appData.disabledBtn()
+        // appData.disabledBtn()
         console.log(appData.screenPrice)
         console.log(appData.rollback)
         console.log(total.value)
@@ -155,6 +158,7 @@ const appData = {
     addScreensBlock: function () {
         const cloneScreen = screens[0].cloneNode(true)
         screens[screens.length - 1].after(cloneScreen)
+        cloneScreen.addEventListener('input',OnInputCountScreen);
     },
     addPrices: function () {
         for (let screen of appData.screens) {
