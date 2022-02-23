@@ -79,7 +79,6 @@ const appData = {
         appData.addServices()
         appData.addPrices();
         // appData.getServicePercentPrice();
-        console.log(appData)
         appData.showResult()
 
     },
