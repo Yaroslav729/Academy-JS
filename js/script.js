@@ -9,7 +9,7 @@ let inputRange = document.querySelector(".rollback input")
 const inputRangeValue = document.querySelector(".rollback .range-value")
 
 const startBtn = document.getElementsByClassName("handler_btn")[0]
-
+startBtn.setAttribute('disabled', "true")
 const resetBtn = document.getElementsByClassName("handler_btn")[1]
 
 const total = document.getElementsByClassName("total-input")[0]
@@ -24,35 +24,23 @@ let arrayInput = document.querySelectorAll(".screen input");
 for (let i = 0; i < select.length, i < arrayInput.length; i++) {
     const elInput = arrayInput[i]
     const elSelect = select[i]
+    elInput .addEventListener('input', OnInputCountScreen);
+    elSelect.addEventListener('change', OnInputCountScreen);
 
-    elInput.addEventListener('input',OnInputCountScreen);
-    elSelect.addEventListener('change', screensSelect);
 }
 
-
-function screensSelect() {
-    let screensSelectOption = document.querySelectorAll(".screen select")
-    for (let i = 0; i < screensSelectOption.length; i++) {
-        const selectOption = screensSelectOption[i]
-        console.log(selectOption.value)
-        // if (!selectOption.value) {
-        //     startBtn.setAttribute('disabled', "false");
-        // }else {
-        //     startBtn.removeAttribute('disabled')
-        // }
-    }
-}
 
 function OnInputCountScreen() {
+    let screensSelectOption = document.querySelectorAll(".screen select")
     let arrayInputCurrent =  document.querySelectorAll(".screen input");
-    for (let i = 0; i < arrayInputCurrent.length; i++) {
+    for (let i = 0; i < screensSelectOption.length, i < arrayInputCurrent.length; i++) {
+        const selectOption = screensSelectOption[i]
         const element = arrayInputCurrent[i];
-        console.log(element.value)
-        // if (!element.value) {
-        //     startBtn.setAttribute('disabled', "false");
-        // }else {
-        //     startBtn.removeAttribute('disabled')
-        // }
+        if (!selectOption.value || !element.value) {
+            startBtn.setAttribute('disabled', "false");
+        }else {
+            startBtn.removeAttribute('disabled')
+        }
     }
 }
 
@@ -150,7 +138,6 @@ const appData = {
         const cloneScreen = screens[0].cloneNode(true)
         screens[screens.length - 1].after(cloneScreen)
         cloneScreen.addEventListener('input',OnInputCountScreen);
-        cloneScreen.addEventListener('change',screensSelect);
     },
     addPrices: function () {
         for (let screen of appData.screens) {
