@@ -80,13 +80,14 @@ const appData = {
                 checkList[i].checked = false
             }
         }
-        init_input.value = 0
+        init_input.value = ''
         init_select.options[0].selected = true
-        init_input.setAttribute('disabled', "false")
-        init_select.setAttribute('disabled', "false")
+        init_input.disabled = false
+        init_select.disabled = false
         startBtn.style.display = 'block'
         resetBtn.style.display = 'none'
-        console.log(this.input)
+        startBtn.setAttribute('disabled', "true")
+
     },
 
     init: function () {
@@ -110,20 +111,13 @@ const appData = {
     start: function (e) {
         e.target.style.display = 'none'
         resetBtn.style.display = 'block'
-
         init_input.setAttribute('disabled', "true")
         init_select.setAttribute('disabled', "true")
-
         this.disabledDynamicField()
-        this.addScreens()
-        this.addServices()
-        this.addPrices();
-        // this.getServicePercentPrice();
+            this.addScreens()
+            this.addServices()
+            this.addPrices();
         this.showResult()
-    },
-
-    isString: function (str) {
-        return isNaN(parseFloat(str))
     },
 
     showResult: function () {
