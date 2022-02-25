@@ -19,8 +19,8 @@ const totalCountOther = document.getElementsByClassName("total-input")[2]
 const fullTotalCount = document.getElementsByClassName("total-input")[3]
 const totalCountRollback = document.getElementsByClassName("total-input")[4]
 let screens = document.querySelectorAll(".screen")
-let select = document.querySelectorAll(".screen select")
-let arrayInput = document.querySelectorAll(".screen input");
+let init_select = document.querySelector(".screen select")
+let init_input = document.querySelector(".screen input");
 
 let onInputCountScreen = () => {
     let screensSelectOption = document.querySelectorAll(".screen select")
@@ -40,30 +40,12 @@ let atom = (html, event, coll) => {
     html.addEventListener(event, coll)
 }
 
-for (let i = 0; i < select.length, i < arrayInput.length; i++) {
-    const elInput = arrayInput[i]
-    const elSelect = select[i]
-    atom(elInput, 'input', onInputCountScreen)
-    atom(elSelect, "change", onInputCountScreen)
-}
-let buttonDisabled = () => {
-    startBtn.addEventListener("click", disabledInputSelect)
-}
-let disabledInputSelect = () => {
-    for (let i = 0; i < select.length, i < arrayInput.length; i++) {
-        const elInput = arrayInput[i]
-        const elSelect = select[i]
-        elInput.setAttribute('disabled', "true")
-        elSelect.setAttribute('disabled', "true")
-        startBtn.style.display = 'none';
-        startBtnReset.style.display = 'block';
-    }
-}
+    atom(init_input, 'input', onInputCountScreen)
+    atom(init_select, "change", onInputCountScreen)
 
-const appData = {
+const init = {
     title: "",
     screens: [],
-    input: [],
     screenPrice: 0,
     adaptive: true,
     rollback: 0,
@@ -74,12 +56,25 @@ const appData = {
     servicesPercent: {},
     servicesNumber: {},
     total: 0,
+}
+const appData = {
+    ...init,
+    input: [],
+
+    reset: function () {
+       for (let i = 0; i < this.input.length; i++){
+           this.input[i].remove()
+       }
+       this = {
+           ...this, ...init
+       }
+    },
 
     init: function () {
         this.addTitle()
-        buttonDisabled()
-        atom(startBtn, "click", () => this.start())
+        atom(startBtn, "click", (nod) => this.start(nod))
         atom(buttonPlus, 'click', () => this.addScreensBlock())
+        atom(resetBtn, 'click', () => this.reset())
     },
 
     addTitle: function () {
@@ -91,7 +86,14 @@ const appData = {
         this.rollback = inputRange.value
     },
 
-    start: function () {
+    start: function (e) {
+        e.target.style.display = 'none'
+        resetBtn.style.display = 'block'
+
+        init_input.setAttribute('disabled', "true")
+        init_select.setAttribute('disabled', "true")
+
+        this.disabledDynamicField()
         this.addScreens()
         this.addServices()
         this.addPrices();
@@ -156,7 +158,16 @@ const appData = {
         atom(input, 'input', onInputCountScreen)
         atom(select, 'change', onInputCountScreen)
         screens[screens.length - 1].after(cloneScreen)
-        console.log(cloneScreen)
+        this.input.push(cloneScreen)
+    },
+
+    disabledDynamicField: function () {
+    this.input.forEach((input) => {
+    let text = input.querySelector("input")
+    let select = input.querySelector("select")
+        text.setAttribute('disabled', "true")
+        select.setAttribute('disabled', "true")
+})
     },
     addPrices: function () {
         for (let screen of this.screens) {
