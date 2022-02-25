@@ -21,6 +21,7 @@ const totalCountRollback = document.getElementsByClassName("total-input")[4]
 let screens = document.querySelectorAll(".screen")
 let init_select = document.querySelector(".screen select")
 let init_input = document.querySelector(".screen input");
+let checkList = document.querySelectorAll('.custom-checkbox')
 
 let onInputCountScreen = () => {
     let screensSelectOption = document.querySelectorAll(".screen select")
@@ -40,8 +41,8 @@ let atom = (html, event, coll) => {
     html.addEventListener(event, coll)
 }
 
-    atom(init_input, 'input', onInputCountScreen)
-    atom(init_select, "change", onInputCountScreen)
+atom(init_input, 'input', onInputCountScreen)
+atom(init_select, "change", onInputCountScreen)
 
 const init = {
     title: "",
@@ -62,12 +63,30 @@ const appData = {
     input: [],
 
     reset: function () {
-       for (let i = 0; i < this.input.length; i++){
-           this.input[i].remove()
-       }
-       this = {
-           ...this, ...init
-       }
+        for (let i = 0; i < this.input.length; i++) {
+            this.input[i].remove()
+        }
+        Object.assign(this, init)
+        this.screens = []
+        this.servicesPercent = {}
+        this.servicesNumber = {}
+        this.input = []
+        inputRange.value = this.rollback
+        inputRangeValue.innerHTML = this.rollback + "%"
+        this.addPrices()
+        this.showResult()
+        for (let i = 0; i < checkList.length; i++) {
+            if (checkList[i].checked) {
+                checkList[i].checked = false
+            }
+        }
+        init_input.value = 0
+        init_select.options[0].selected = true
+        init_input.setAttribute('disabled', "false")
+        init_select.setAttribute('disabled', "false")
+        startBtn.style.display = 'block'
+        resetBtn.style.display = 'none'
+        console.log(this.input)
     },
 
     init: function () {
@@ -75,15 +94,17 @@ const appData = {
         atom(startBtn, "click", (nod) => this.start(nod))
         atom(buttonPlus, 'click', () => this.addScreensBlock())
         atom(resetBtn, 'click', () => this.reset())
+        atom(inputRange, 'input', (e) => this.rangeInput(e))
+
     },
 
     addTitle: function () {
         document.title = title.textContent;
     },
 
-    rangeInput: inputRange.oninput = function () {
-        inputRangeValue.innerHTML = inputRange.value + "%"
-        this.rollback = inputRange.value
+    rangeInput: function (e) {
+        inputRangeValue.innerHTML = e.target.value + "%"
+        this.rollback = e.target.value
     },
 
     start: function (e) {
@@ -162,16 +183,22 @@ const appData = {
     },
 
     disabledDynamicField: function () {
-    this.input.forEach((input) => {
-    let text = input.querySelector("input")
-    let select = input.querySelector("select")
-        text.setAttribute('disabled', "true")
-        select.setAttribute('disabled', "true")
-})
+        this.input.forEach((input) => {
+            let text = input.querySelector("input")
+            let select = input.querySelector("select")
+            text.setAttribute('disabled', "true")
+            select.setAttribute('disabled', "true")
+        })
     },
     addPrices: function () {
-        for (let screen of this.screens) {
-            this.screenPrice += +screen.price
+        if (this.screens.length) {
+            for (let screen of this.screens) {
+                this.screenPrice += +screen.price
+                totalCount.value = +totalCount.value + +screen.count
+            }
+        }else{
+            this.screenPrice = 0
+            totalCount.value = 0
         }
 
         for (let key in this.servicesNumber) {
@@ -180,10 +207,6 @@ const appData = {
 
         for (let key in this.servicesPercent) {
             this.servicePricesPercent += this.screenPrice * (this.servicesPercent[key] / 100)
-        }
-
-        for (let screen of this.screens) {
-            totalCount.value = +totalCount.value + +screen.count
         }
 
         this.fullPrice = +this.screenPrice + this.servicePricesNumber + this.servicePricesPercent;
